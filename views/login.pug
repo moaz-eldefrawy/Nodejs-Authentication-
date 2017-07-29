@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .container(style="padding-top: 80px")
+    .col-sm-6.col-sm-offset-3(style="border: 1px solid lightgrey; padding: 15px; border-radius: 10px")
+      
+      h1
+        span.fa.fa-signin
+        span  login
+      
+      if message != ""
+        .alert.alert-danger #{message}
+      
+      form(action="/login" method="post")
+        .form-group
+          label Email
+          input(type="text" class="form-control" name="email")
+          
+        .form-group
+          label Password
+          input(type="password" class="form-control" name="password")
+          
+        button.btn.btn-warning.btn-lg(type="submit") Login
+        
+      p 
+        span Need an account?
+        a(href="/signup")  Signup
+      
+      p
+        Or go
+        a(href="/")  Home.
