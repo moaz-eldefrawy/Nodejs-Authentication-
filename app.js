@@ -18,7 +18,6 @@ var configDb = require('./config/database.js');
 
 
 var app = express();
-console.log(app.use);
 mongoose.connect(configDb.url, {
   useMongoClient: true,
   config: {
@@ -27,22 +26,7 @@ mongoose.connect(configDb.url, {
 
 });
 
-require('./config/passport')(passport); // pass passport for configuration
-/*
-var customerSchema = new mongoose.Schema({
-  local: {
-    email: String,
-    password: String
-  }
-});
-
-var Customer = mongoose.model('user', usersSchema);
-Customer.findOne({'local.email': 'user1@gmail.com'}, function(name, user){
-  if(err) return console.log(err);
-  console.log(user);
-});
-*/
-
+require('./config/passport')(passport); // pass passport for
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -85,13 +69,6 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.post("*", function(req, res, next){
-  console.log("for all posts:")
-  console.log(req.user);
-  console.log(req.params);
-  console.log(req.flash());
-  next();
-});
 
 app.post("/signup", passport.authenticate('local-signup', {
   successRedirect: '/',
@@ -104,6 +81,14 @@ app.post('/login', passport.authenticate('local-login', {
     failureFlash : true // allow flash messages
 }));
 
+app.get('/auth/facebook', passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends'] })
+);
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
 
 function isLoggedIn(req, res, next){
 

@@ -1,40 +1,55 @@
-<!-- views/profile.ejs -->
-<!doctype html>
-<html>
-<head>
-    <title>Node Authentication</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body        { padding-top:80px; word-wrap:break-word; }
-    </style>
-</head>
-<body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
-
-    <div class="row">
-
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
-                    <p>
-                        <strong>id</strong>: #{user._id }<br>
-                        <strong>email</strong>: #{user.local.email}<br>
-                        <strong>password</strong>: #{user.local.password}
-                    </p>
-
-            </div>
-        </div>
-
-    </div>
-
-</div>
-</body>
-</html>
+doctype html
+// views/profile.ejs
+html
+  head
+    title Node Authentication
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+    style.
+      body        { padding-top:80px; word-wrap:break-word; }
+  body
+    .container
+      .page-header.text-center
+        h1
+          span.fa.fa-anchor
+          |  Profile Page
+        a.btn.btn-default.btn-sm(href='/logout') Logout
+      .row
+        // LOCAL INFORMATION
+        .col-sm-6
+          .well
+            h3
+              span.fa.fa-user
+              |  Local
+            p
+              strong id
+              | : #{user._id}
+              br
+              strong email
+              | : #{user.local.email}
+              br
+              strong password
+              | : #{user.local.password}
+        // Facebook Information
+        .col-sm-6
+          .well
+            h3.text-primary
+              span.fa.fa-facebook
+              | Facebook
+            p
+              span 
+                strong id:
+                span  #{user.facebook.id}
+                br
+              span 
+                strong token:
+                span  #{user.facebook.token}
+                br
+              span 
+                strong email:
+                span  #{user.facebook.email} 
+                br
+              span 
+                strong name:
+                span  #{user.facebook .name}
+                br
